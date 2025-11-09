@@ -32,7 +32,7 @@ st.title("📄 Склейка PDF-файлов")
 st.caption("Загрузи несколько PDF и получи один объединённый документ")
 
 uploaded = st.file_uploader(
-    "Выбери или перетащи файлы (до 200 МБ каждый)",
+    "Выбери или перетащи PDF-файлы",
     type=["pdf"],
     accept_multiple_files=True,
     key=f"uploader_{st.session_state.uploader_key}",
@@ -40,8 +40,8 @@ uploaded = st.file_uploader(
 if uploaded:
     st.session_state.files = uploaded
 
-if not st.session_state.files:
-    st.info("Загрузи хотя бы один PDF, чтобы начать работу.")
+if len(st.session_state.files) < 2:
+    st.info("Для склейки нужно выбрать как минимум два PDF-файла.")
     st.stop()
 
 st.divider()
@@ -70,7 +70,7 @@ st.divider()
 st.markdown(
     """
     <div style="text-align:center; opacity:0.6; font-size:0.9em;">
-      Сделано на Python 3.13 + Streamlit + UV<br>
+      Сделано на Python 3.13 + Streamlit<br>
     </div>
     """,
     unsafe_allow_html=True,
